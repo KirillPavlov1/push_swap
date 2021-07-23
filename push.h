@@ -52,3 +52,4 @@ int count_sum(t_b **b);
 void cleaner(t_b **b);
 int is_biggest(t_a **a, int n, int m);
 void counter_a2(t_a **b);
+void remove_a(t_a **a);

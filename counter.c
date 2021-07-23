@@ -66,12 +66,12 @@ void counter_a(t_a **a, t_b **b)
     {
         while((*a)->next != a1)
         {
-            if (num > (*a)->n && (*a)->n > (*b)->n || is_biggest(a, (*b)->n, (*a)->n))
+            if ((num > (*a)->n && (*a)->n > (*b)->n) || is_biggest(a, (*b)->n, (*a)->n))
                 num = (*a)->n;
             (*a) = (*a)->next;
         }
-        if (num > (*a)->n && (*a)->n > (*b)->n || is_biggest(a, (*b)->n, (*a)->n))
-                num = (*a)->n;
+        if ((num > (*a)->n && (*a)->n > (*b)->n) || is_biggest(a, (*b)->n, (*a)->n))
+            num = (*a)->n;
         (*a) = a1;
         while ((*a)->n != num)
         {
@@ -79,7 +79,10 @@ void counter_a(t_a **a, t_b **b)
             (*b)->up_a++;
         }
         if ((*b)->n > num)
-            (*b)->up_a = 0;
+		{
+			ra(a);
+            (*b)->up_a++;
+		}
         (*a) = a1;
         while ((*a)->n != num)
         {
@@ -87,18 +90,23 @@ void counter_a(t_a **a, t_b **b)
             (*b)->down_a++;
         }
         if ((*b)->n > num)
-            (*b)->down_a = 0;
+		{	
+			ra(a);
+            (*b)->down_a--;
+		}
+		if ((*b)->down_a == -1)
+			(*b)->down_a = (*b)->up_a + 1;
         (*a) = a1;
         (*b) = (*b)->next;
         num = 2147483647;
     }
         while((*a)->next != a1)
         {
-            if (num > (*a)->n && (*a)->n > (*b)->n || is_biggest(a, (*b)->n, (*a)->n))
+            if ((num > (*a)->n && (*a)->n > (*b)->n) || is_biggest(a, (*b)->n, (*a)->n))
                 num = (*a)->n;
             (*a) = (*a)->next;
         }
-        if (num > (*a)->n && (*a)->n > (*b)->n || is_biggest(a, (*b)->n, (*a)->n))
+        if ((num > (*a)->n && (*a)->n > (*b)->n) || is_biggest(a, (*b)->n, (*a)->n))
                 num = (*a)->n;
         (*a) = a1;
         while ((*a)->n != num)
@@ -107,7 +115,10 @@ void counter_a(t_a **a, t_b **b)
             (*b)->up_a++;
         }
         if ((*b)->n > num)
-            (*b)->up_a = 0;
+		{
+			ra(a);
+            (*b)->up_a++;
+		}
         (*a) = a1;
         (*a) = a1;
         while ((*a)->n != num)
@@ -116,7 +127,12 @@ void counter_a(t_a **a, t_b **b)
             (*b)->down_a++;
         }
         if ((*b)->n > num)
-            (*b)->down_a = 0;
+		{
+			ra(a);
+            (*b)->down_a--;
+		}
+		if ((*b)->down_a == -1)
+			(*b)->down_a = (*b)->up_a + 1;;
         (*a) = a1;
         (*b) = (*b)->next;
         num = 2147483647;

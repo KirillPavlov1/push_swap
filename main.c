@@ -72,6 +72,24 @@ void sort_mina(t_a **a)
     }
 }
 
+void remove_a(t_a **a)
+{
+    t_a *clone;
+	t_a *begin;
+
+	clone = *a;
+	begin = *a;
+	if (!*a)
+		return ;
+	while (clone->next != begin)
+	{
+		clone = clone->next;
+		free(*a);
+		*a = clone;
+	}
+	free(clone);
+}
+
 int main(int argc, char *argv[])
 {
     int i;
@@ -79,6 +97,11 @@ int main(int argc, char *argv[])
     t_a *a;
 
     i = 0;
+	if (argc < 3)
+	{		
+		return (0);
+	}
+	// добавить условие для количества аргументов
     if (!(check_argv(argc, argv)))
     {
         write(1, "error\n", 6);
@@ -107,5 +130,6 @@ int main(int argc, char *argv[])
     }
     counter_a2(&a);
     sort_mina(&a);
+	remove_a(&a);
     return (0);
 }
