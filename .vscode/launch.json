@@ -1,0 +1,20 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "push_swap",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/push_swap",
+            "args": ["9246", "2276", "409" ,"6975", "4801" ,"5958", "6487", "6636", "9673", "7361" ,"2773", "9170" ,"7581", "4611", "9009", "6169", "456" ,"6776" ,"1584" ,"8707", "1547", "7197", "8094", "53" ,"6322" ,"576" ,"9221" ,"513", "9871", "5239", "6445", "1797"] ,
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        }
+    ]
+}
