@@ -144,28 +144,11 @@ int count_sum(t_b **b)
 	return (a + a2);
 }
 
-void move_stacks(t_a **a, t_b **b)
+void move_stacks2(t_a **a, t_b **b, int min)
 {
-	t_b *begin_b;
-	t_a *begin_a;
-	int min;
-	int c;
 	int i;
 
 	i = 0;
-	begin_b = *b;
-	min = 2147483647;
-	while((*b)->next != begin_b)
-	{
-		c = count_sum(b);
-		if (c < min)
-			min = c;
-		(*b) = (*b)->next;
-	}
-	c = count_sum(b);
-	if (c < min)
-		min = c;
-	(*b) = begin_b;
 	while((*b)->sum != min)
 		(*b) = (*b)->next;
 	if((*b)->down_a > (*b)->up_a)
@@ -180,4 +163,27 @@ void move_stacks(t_a **a, t_b **b)
 		while(i--)
 			rra(a);
 	}
+}
+
+void move_stacks(t_a **a, t_b **b)
+{
+	t_b *begin_b;
+	t_a *begin_a;
+	int min;
+	int c;
+
+	begin_b = *b;
+	min = 2147483647;
+	while((*b)->next != begin_b)
+	{
+		c = count_sum(b);
+		if (c < min)
+			min = c;
+		(*b) = (*b)->next;
+	}
+	c = count_sum(b);
+	if (c < min)
+		min = c;
+	(*b) = begin_b;
+	move_stacks2(a, b, min);
 }

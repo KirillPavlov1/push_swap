@@ -1,19 +1,5 @@
 #include "push.h"
 
-/*void sort_a1(t_a **a)
-{
-    int first;
-    int second;
-
-    (*a) = (*a)->next->next;
-    first = (*a)->n;
-    second = (*a)->next->n;
-    (*a)->n = second;
-    (*a)->next->n = first;
-    printf("rra\n");
-    printf("sa\n");
-}*/
-
 void sort_a(t_a **a)
 {
     int k;
@@ -31,26 +17,11 @@ void sort_a(t_a **a)
         sa(a);
 }
 
-void sort_mina(t_a **a)
+void sort_mina2(t_a **a, t_a *a1)
 {
-    t_a *a1;
-    int min;
-    int i;
+	int i;
 
-    a1 = *a;
-    min = 2147483647;
-    while ((*a)->next != a1)
-    {
-        if (min > (*a)->n)
-            min = (*a)->n;
-        (*a) = (*a)->next;
-    }
-    if (min > (*a)->n)
-        min = (*a)->n;
-    *a = a1;
-    while ((*a)->n != min)
-        (*a) = (*a)->next;
-    if ((*a)->up > (*a)->down)
+	if ((*a)->up > (*a)->down)
         i = (*a)->down;    
     else
          i = (*a)->up;  
@@ -72,6 +43,27 @@ void sort_mina(t_a **a)
     }
 }
 
+void sort_mina(t_a **a)
+{
+    t_a *a1;
+    int min;
+
+    a1 = *a;
+    min = 2147483647;
+    while ((*a)->next != a1)
+    {
+        if (min > (*a)->n)
+            min = (*a)->n;
+        (*a) = (*a)->next;
+    }
+    if (min > (*a)->n)
+        min = (*a)->n;
+    *a = a1;
+    while ((*a)->n != min)
+        (*a) = (*a)->next;
+	sort_mina2(a, a1);
+}
+
 void remove_a(t_a **a)
 {
     t_a *clone;
@@ -90,34 +82,37 @@ void remove_a(t_a **a)
 	free(clone);
 }
 
-int main(int argc, char *argv[])
+void main2(t_a **a, t_b **b, int argc, char **argv)
 {
-    int i;
-    t_b *b;
-    t_a *a;
+	int i;
 
-    i = 0;
-	if (argc < 3)
-	{		
-		return (0);
-	}
-	// добавить условие для количества аргументов
-    if (!(check_argv(argc, argv)))
-    {
-        write(1, "error\n", 6);
-        return (0);
-    }
+	i = 0;
     while(++i < argc - 3)
     {
-        pb(&b, ft_bnew(argv[i]));
+        pb(b, ft_bnew(argv[i]));
         write(1, "pb\n", 3);
     }
     i = i - 1;
     while(++i < argc)
     {
-        ft_adda_back(&a, ft_anew(argv[i]));
+        ft_adda_back(a, ft_anew(argv[i]));
     }
-    sort_a(&a);
+    sort_a(a);
+}
+
+int main(int argc, char *argv[])
+{
+    t_b *b;
+    t_a *a;
+
+	if (argc < 3)	
+		return (0);
+    if (!(check_argv(argc, argv)))
+    {
+        write(1, "error\n", 6);
+        return (0);
+    }
+	main2(&a, &b, argc, argv);
     while (b)
     {
         cleaner(&b);
