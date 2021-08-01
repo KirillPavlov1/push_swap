@@ -22,6 +22,11 @@ typedef struct			s_b{
 	struct s_b          *next;
 }						t_b;
 
+typedef struct			s_set{
+	char				*c;
+	struct s_set		*next;
+}						t_set;
+
 t_b	*ft_bnew(void *content);
 void	ft_addb_back(t_b **lst, t_b *new);
 void	ft_adda_back(t_a **lst, t_a *new);
@@ -39,12 +44,12 @@ void rr(t_a **a, t_b **b);
 void sa(t_a **a);
 void sb(t_b **b);
 void ss(t_a **a, t_b **b);
-void	pb(t_b **lst, t_b *new);
 void	pa(t_a **lst, t_a *new);
 int	b_size(t_b *b);
 void counter_b(t_b **b);
 void counter_a(t_a **a, t_b **b);
 t_a	*ft_anew_n(int n);
+t_b	*ft_bnew_n(int n);
 void remove_b(t_b **b);
 void print_commands(t_b *b);
 void move_stacks(t_a **a, t_b **b);
@@ -53,3 +58,12 @@ void cleaner(t_b **b);
 int is_biggest(t_a **a, int n, int m);
 void counter_a2(t_a **b);
 void remove_a(t_a **a);
+int first_last(char *argv[], int argc);
+t_set	*ft_setnew(char *line);
+void	ft_setadd_back(t_set **lst, t_set *new);
+void main2(t_a **a, t_b **b, int argc, char **argv);
+void sort_mina(t_a **a);
+void sort_mina2(t_a **a);
+void sort_a(t_a **a);
+void execute_c(t_set *com, t_a **a, t_b **b);
+int ft_strcmp(char *str1, char *str2);

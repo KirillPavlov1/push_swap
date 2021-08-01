@@ -6,7 +6,7 @@
 /*   By: cvirgin <cvirgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 17:17:29 by kirill            #+#    #+#             */
-/*   Updated: 2021/07/23 23:31:40 by cvirgin          ###   ########.fr       */
+/*   Updated: 2021/07/26 23:59:55 by cvirgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ t_a	*ft_anew_n(int n)
 		return (NULL);
 	new->past = new;
 	new->next = new;
+	new->n = n;
+	return (new);
+}
+
+t_b	*ft_bnew_n(int n)
+{
+	t_b *new;
+
+	if (!(new = malloc(sizeof(t_b))))
+		return (NULL);
+	new->past = new;
+	new->next = new;
+	new->up_a = 0;
+	new->down_a = 0;
+	new->up = 0;
+	new->down = 0;
 	new->n = n;
 	return (new);
 }

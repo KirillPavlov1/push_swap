@@ -23,6 +23,8 @@ void rrr(t_a **a, t_b **b)
     t_a *begin_a;
     t_b *begin_b;
 
+	begin_a = *a;
+	begin_b = *b;
     while((*a)->next != begin_a)
         (*a) = (*a)->next;
     while((*b)->next != begin_b)
@@ -54,7 +56,6 @@ void sa(t_a **a)
     second = (*a)->next->n;
     (*a)->n = second;
     (*a)->next->n = first;
-	write(1, "sa\n", 3);
 }
 
 void sb(t_b **b)
@@ -168,7 +169,6 @@ void move_stacks2(t_a **a, t_b **b, int min)
 void move_stacks(t_a **a, t_b **b)
 {
 	t_b *begin_b;
-	t_a *begin_a;
 	int min;
 	int c;
 
