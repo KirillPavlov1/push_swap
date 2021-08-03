@@ -250,21 +250,6 @@ void sort_mina(t_a **a)
 
 void remove_a(t_a **a)
 {
-/*    t_a *clone;
-	t_a *begin;
-
-	clone = *a;
-	begin = *a;
-	if (!*a)
-		return ;
-	while (clone->next != begin)
-	{
-		clone = clone->next;
-		free(*a);
-		*a = clone;
-	}
-	free(clone);
-    */
     t_a *begin;
 
     begin = *a;
@@ -285,24 +270,6 @@ void remove_a(t_a **a)
         (*a) = begin->next;
         free(begin);
     }
-}
-
-void main2(t_a **a, t_b **b, int argc, char **argv)
-{
-	int i;
-
-	i = 0;
-    while(++i < argc - 3)
-    {
-        pb(b, ft_bnew(argv[i]));
-        write(1, "pb\n", 3);
-    }
-    i = i - 1;
-    while(++i < argc)
-    {
-        ft_adda_back(a, ft_anew(argv[i]));
-    }
-    sort_a(a);
 }
 
 int first_last(char *argv[], int argc)

@@ -62,7 +62,6 @@ void remove_a(t_a **a);
 int first_last(char *argv[], int argc);
 t_set	*ft_setnew(char *line);
 void	ft_setadd_back(t_set **lst, t_set *new);
-void main2(t_a **a, t_b **b, int argc, char **argv);
 void sort_mina(t_a **a);
 void sort_mina2(t_a **a);
 void sort_a(t_a **a);
