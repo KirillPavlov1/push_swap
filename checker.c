@@ -29,34 +29,52 @@ void	ft_setadd_back(t_set **lst, t_set *new)
 	p->next = new;
 }
 
-void execute_c(t_set *com, t_a **a, t_b **b)
+int execute_c(t_set *com, t_a **a, t_b **b)
 {
 	while (com)
 	{
 		if (!ft_strcmp(com->c, "rrr"))
 			rrr(a, b);
-		if (!ft_strcmp(com->c, "rra"))
+		else if (!ft_strcmp(com->c, "rra"))
 			rra(a);
-		if (!ft_strcmp(com->c, "rrb"))
+		else if (!ft_strcmp(com->c, "rrb"))
 			rrb(b);
-		if (!ft_strcmp(com->c, "rr"))
+		else if (!ft_strcmp(com->c, "rr"))
 			rr(a, b);
-		if (!ft_strcmp(com->c, "ra"))
+		else if (!ft_strcmp(com->c, "ra"))
 			ra(a);
-		if (!ft_strcmp(com->c, "rb"))
+		else if (!ft_strcmp(com->c, "rb"))
 			rb(b);
-		if (!ft_strcmp(com->c, "sa"))
+		else if (!ft_strcmp(com->c, "sa"))
 			sa(a);
-		if (!ft_strcmp(com->c, "sb"))
+		else if (!ft_strcmp(com->c, "sb"))
 			sb(b);
-		if (!ft_strcmp(com->c, "ss"))
+		else if (!ft_strcmp(com->c, "ss"))
 			ss(a, b);
-		if (!ft_strcmp(com->c, "pa"))	
-			pa(a, ft_anew_n((*b)->n));
-		if (!ft_strcmp(com->c, "pb"))	
-			pb(b, ft_bnew_n((*a)->n));
+		else if (!ft_strcmp(com->c, "pa"))
+		{
+			if (b_size(*b) > 0)
+			{
+				pa(a, ft_anew_n((*b)->n));
+				remove_b(b);
+			}
+		}
+		else if (!ft_strcmp(com->c, "pb"))
+		{
+			if (a_size(*a) > 0)
+			{
+				pb(b, ft_bnew_n((*a)->n));
+				remove_a(a);
+			}
+		}
+		else
+		{
+			write(1, "Error\n", 6);
+			return (0);
+		}
 		com = com->next;
 	}
+	return (1);
 }
 
 int first_lasta(t_a *a)
@@ -83,7 +101,7 @@ int main(int argc, char **argv)
 	t_set	*c;
 	char	*line;
 
-	i = -1;
+	i = 0;
 	if (argc < 3)	
 		return (0);
     if (!(check_argv(argc, argv)))
@@ -98,7 +116,11 @@ int main(int argc, char **argv)
 		ft_setadd_back(&c, ft_setnew(line));
 		free(line);
 	}
-	execute_c(c, &a, &b);
+	if (ft_strcmp(line, ""))
+		ft_setadd_back(&c, ft_setnew(line));
+	free(line);
+	if (!(execute_c(c, &a, &b)))
+		return (0);
 	if (first_lasta(a))
 		write(1, "OK\n", 3);
 	else

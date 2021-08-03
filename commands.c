@@ -52,6 +52,8 @@ void sa(t_a **a)
     int first;
     int second;
 
+	if (a_size(*a) < 2)
+		return ;
     first = (*a)->n;
     second = (*a)->next->n;
     (*a)->n = second;
@@ -63,6 +65,8 @@ void sb(t_b **b)
     int first;
     int second;
 
+	if (b_size(*b) < 2)
+		return ;
     first = (*b)->n;
     second = (*b)->next->n;
     (*b)->n = second;

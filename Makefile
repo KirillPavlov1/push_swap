@@ -42,11 +42,11 @@ bonus:
 	
 clean:
 	make clean -C libft
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(OBJ_B)
 
 fclean:	clean
 	make fclean -C libft
-	rm -f $(NAME) 
+	rm -f $(NAME) $(NAME_B)
 
 re: fclean all
 
