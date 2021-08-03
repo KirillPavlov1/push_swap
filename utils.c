@@ -113,7 +113,7 @@ void remove_b(t_b **b)
 
 void print_commands(t_b *b)
 {
-    if (b->down > b->up)
+    /*if (b->down > b->up)
     {
         while(b->up--)
             write(1, "rb\n", 3);
@@ -132,6 +132,109 @@ void print_commands(t_b *b)
     else
     {
         while(b->down_a--)
+            write(1, "rra\n", 4);
+    }*/
+	/*if (b->down > b->up && b->down_a > b->up_a)
+	{
+		while (b->up-- && b->up_a--)
+			write(1, "rr\n", 3);
+		while (b->up-- > 0)
+			write(1, "rb\n", 3);
+		while (b->up_a-- > 0)
+			write(1, "ra\n", 3);
+		b->up = 0;
+		b->up_a = 0;
+	}
+	else if (b->down > b->up)
+    {
+        while(b->up--)
+            write(1, "rb\n", 3);
+		b->up = 0;
+    }
+    else
+    {
+        while(b->up_a--)
+            write(1, "ra\n", 3);
+		b->up_a = 0;
+    }
+	if (b->down < b->up && b->down_a < b->up_a)
+	{
+		while (b->down-- && b->down_a--)
+			write(1, "rrr\n", 4);
+		while (b->down-- > 0)
+			write(1, "rrb\n", 4);
+		while (b->down_a-- > 0)
+			write(1, "rra\n", 4);
+		b->down = 0;
+		b->down_a = 0;
+	}
+	else if (b->down_a < b->up_a)
+    {
+        while(b->down_a--)
+            write(1, "rra\n", 4);
+		b->down_a = 0;
+    }
+    else
+    {
+        while(b->down--)
+            write(1, "rrb\n", 4);
+		b->down = 0;
+    }*/
+	if (b->down > b->up)
+    {
+		if (b->down_a > b->up_a)
+		{
+			while(b->up > 0 && b->up_a > 0)
+			{
+				b->up--;
+				b->up_a--;
+            	write(1, "rr\n", 3);
+			}
+		}
+        while(b->up-- > 0)
+            write(1, "rb\n", 3);
+    }
+    else
+    {
+		if (b->up_a > b->down_a)
+		{
+			while(b->down > 0 && b->down_a > 0)
+			{
+				b->down--;
+				b->down_a--;
+            	write(1, "rrr\n", 4);
+			}
+		}
+        while(b->down-- > 0)
+            write(1, "rrb\n", 4);
+    }
+
+    if (b->down_a > b->up_a)
+    {
+		if (b->down > b->up)
+		{
+			while(b->up > 0 && b->up_a > 0)
+			{
+				b->up--;
+				b->up_a--;
+            	write(1, "rr\n", 3);
+			}
+		}
+        while(b->up_a-- > 0)
+            write(1, "ra\n", 3);
+    }
+    else
+    {
+		if (b->up > b->down)
+		{
+			while(b->down > 0 && b->down_a > 0)
+			{
+				b->down--;
+				b->down_a--;
+            	write(1, "rrr\n", 4);
+			}
+		}
+        while(b->down_a-- > 0)
             write(1, "rra\n", 4);
     }
     write(1, "pa\n", 3);

@@ -77,7 +77,7 @@ int execute_c(t_set *com, t_a **a, t_b **b)
 			sb(b);
 		else if (!ft_strcmp(com->c, "ss"))
 			ss(a, b);
-		if (!execute_c2(com, a, b))
+		else if (!execute_c2(com, a, b))
 			return (0);
 		com = com->next;
 	}
@@ -114,7 +114,7 @@ static void main2(int argc, char **argv, t_a **a, t_set **c)
 		free(line);
 	}
 	if (ft_strcmp(line, ""))
-		ft_setadd_back(&c, ft_setnew(line));
+		ft_setadd_back(c, ft_setnew(line));
 	free(line);
 }
 
@@ -123,7 +123,6 @@ int main(int argc, char **argv)
 	t_b		*b;
     t_a		*a;
 	t_set	*c;
-	char	*line;
 
 	if (argc < 3)	
 		return (0);
