@@ -6,7 +6,7 @@
 /*   By: cvirgin <cvirgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 19:24:48 by cvirgin           #+#    #+#             */
-/*   Updated: 2021/08/03 19:35:19 by cvirgin          ###   ########.fr       */
+/*   Updated: 2021/08/04 16:21:08 by cvirgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	checking(char **line, char *old, char **a)
 	if (old)
 	{
 		*a = ft_strchr2(old, '\n');
-		if ((*a))
+		if (*a)
 		{
 			**a = '\0';
 			*line = ft_strdup(old);
@@ -91,24 +91,27 @@ int	get_next_line(int fd, char **line)
 {
 	char		*buf;
 	char		*a;
-	static char *old;
+	static char	*old;
 	int			i;
 	int			k;
 
 	i = 0;
-	k = checking(line, old, &a);
 	buf = install_mem(BUFFER_SIZE + 1);
-	if (read(fd, old, 0) == -1 || k == -1)
-		return (-1);
+	k = checking(line, old, &a);
 	if (free_mem(NULL, a, buf))
 		return (1);
 	if (!k)
 		free_mem(&old, NULL, NULL);
-	while (!a && (i = read(fd, buf, BUFFER_SIZE)))
+	i = read(fd, buf, BUFFER_SIZE);
+	while (!a && i)
 	{
 		buf[i] = '\0';
-		gnl_join(buf, line, &a, &old);
+		if (!(gnl_join(buf, line, &a, &old)))
+			return (-1);
 	}
 	free_mem(&buf, NULL, NULL);
-	return (i ? 1 : 0);
+	if (i)
+		return (1);
+	else
+		return (0);
 }
